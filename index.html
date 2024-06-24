@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engelsk Sterke Verb 2024-2025</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f8ff;
+            color: #333;
+        }
+        h1, h2, h3 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .year-section {
+            margin-bottom: 20px;
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .week-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .week-button {
+            padding: 8px 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .week-button:hover {
+            background-color: #2980b9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #bdc3c7;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #e8f6fe;
+        }
+        .test-area {
+            background-color: #e8f6fe;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .test-input, .table-input {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        .test-button {
+            padding: 10px 15px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .test-button:hover {
+            background-color: #27ae60;
+        }
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Engelsk Sterke Verb 2024-2025</h1>
+    <div class="year-section">
+        <h2>2024</h2>
+        <div class="week-selector" id="weekSelector2024"></div>
+    </div>
+    <div class="year-section">
+        <h2>2025</h2>
+        <div class="week-selector" id="weekSelector2025"></div>
+    </div>
+    <table id="verbTable">
+        <thead>
+            <tr>
+                <th>Uke</th>
+                <th>Infinitiv</th>
+                <th>Preteritum</th>
+                <th>Perfektum partisipp</th>
+                <th>Norsk oversettelse</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div class="test-area" id="testArea" style="display:none;">
+        <h3>Velg testtype</h3>
+        <button id="singleVerbTest" class="test-button">Enkelt verb test</button>
+        <button id="tableTest" class="test-button">Tabell test</button>
+        <div id="singleTestArea" style="display:none;">
+            <h3>Test deg selv - Enkelt verb</h3>
+            <p id="testQuestion"></p>
+            <input type="text" id="testInput" class="test-input" placeholder="Skriv svaret her">
+            <button id="checkAnswer" class="test-button">Sjekk svar</button>
+            <p id="testResult" class="result"></p>
+        </div>
+        <div id="tableTestArea" style="display:none;">
+            <h3>Test deg selv - Tabell</h3>
+            <table id="testTable"></table>
+            <button id="checkTableAnswer" class="test-button">Sjekk svar</button>
+            <p id="tableTestResult" class="result"></p>
+        </div>
+    </div>
+
+    <script>
+        const verbDataText = `
+34
+to be,was/were,been,å være
+to go,went,gone,å gå
+to do,did,done,å gjøre
+to have,had,had,å ha
+to say,said,said,å si
+
+35
+to get,got,got/gotten,å få
+to make,made,made,å lage
+to know,knew,known,å vite/kjenne
+to think,thought,thought,å tenke
+to take,took,taken,å ta
+
+36
+to see,saw,seen,å se
+to come,came,come,å komme
+to want,wanted,wanted,å ville/ønske
+to look,looked,looked,å se/se ut
+to use,used,used,å bruke
+
+37
+to find,found,found,å finne
+to give,gave,given,å gi
+to tell,told,told,å fortelle
+to work,worked,worked,å arbeide
+to call,called,called,å ringe/kalle
+
+38
+to try,tried,tried,å prøve
+to ask,asked,asked,å spørre
+to need,needed,needed,å trenge
+to feel,felt,felt,å føle
+to become,became,become,å bli
+
+39
+to leave,left,left,å forlate
+to put,put,put,å sette/legge
+to mean,meant,meant,å mene
+to keep,kept,kept,å beholde
+to let,let,let,å la
+
+41
+to begin,began,begun,å begynne
+to seem,seemed,seemed,å virke
+to help,helped,helped,å hjelpe
+to show,showed,shown,å vise
+to hear,heard,heard,å høre
+
+42
+to play,played,played,å spille/leke
+to run,ran,run,å løpe
+to move,moved,moved,å flytte/bevege
+to live,lived,lived,å bo/leve
+to believe,believed,believed,å tro
+
+43
+to bring,brought,brought,å bringe
+to happen,happened,happened,å skje
+to write,wrote,written,å skrive
+to sit,sat,sat,å sitte
+to stand,stood,stood,å stå
+
+44
+to lose,lost,lost,å miste/tape
+to pay,paid,paid,å betale
+to meet,met,met,å møte
+to include,included,included,å inkludere
+to continue,continued,continued,å fortsette
+
+45
+to set,set,set,å sette
+to learn,learned/learnt,learned/learnt,å lære
+to change,changed,changed,å endre/skifte
+to lead,led,led,å lede
+to understand,understood,understood,å forstå
+
+46
+to watch,watched,watched,å se på
+to follow,followed,followed,å følge
+to stop,stopped,stopped,å stoppe
+to create,created,created,å skape
+to speak,spoke,spoken,å snakke
+
+48
+to read,read,read,å lese
+to spend,spent,spent,å bruke (tid/penger)
+to grow,grew,grown,å vokse
+to open,opened,opened,å åpne
+to walk,walked,walked,å gå/spasere
+
+49
+to win,won,won,å vinne
+to teach,taught,taught,å undervise
+to offer,offered,offered,å tilby
+to remember,remembered,remembered,å huske
+to consider,considered,considered,å vurdere
+
+50
+to appear,appeared,appeared,å dukke opp
+to buy,bought,bought,å kjøpe
+to serve,served,served,å servere/tjene
+to die,died,died,å dø
+to send,sent,sent,å sende
+
+02
+to build,built,built,å bygge
+to stay,stayed,stayed,å bli/oppholde seg
+to fall,fell,fallen,å falle
+to cut,cut,cut,å kutte/skjære
+to reach,reached,reached,å nå
+
+03
+to kill,killed,killed,å drepe
+to raise,raised,raised,å heve/oppdra
+to pass,passed,passed,å passere
+to sell,sold,sold,å selge
+to decide,decided,decided,å bestemme
+
+04
+to return,returned,returned,å returnere
+to explain,explained,explained,å forklare
+to hope,hoped,hoped,å håpe
+to develop,developed,developed,å utvikle
+to carry,carried,carried,å bære
+
+05
+to break,broke,broken,å brekke/knuse
+to receive,received,received,å motta
+to agree,agreed,agreed,å være enig
+to support,supported,supported,å støtte
+to hit,hit,hit,å treffe/slå
+
+06
+to produce,produced,produced,å produsere
+to eat,ate,eaten,å spise
+to cover,covered,covered,å dekke
+to catch,caught,caught,å fange
+to draw,drew,drawn,å tegne
+to choose,chose,chosen,å velge
+        `;
+
+        let verbData = {};
+        let currentWeek = null;
+        let currentVerb = null;
+        let currentForm = null;
+
+        function parseVerbData() {
+            const lines = verbDataText.trim().split('\n');
+            let currentWeek = null;
+
+            lines.forEach(line => {
+                line = line.trim();
+                if (line === '') return;
+                
+                if (line.match(/^\d+$/)) {
+                    currentWeek = parseInt(line);
+                    verbData[currentWeek] = [];
+                } else if (currentWeek !== null) {
+                    const [infinitiv, preteritum, perfektum, norsk] = line.split(',');
+                    verbData[currentWeek].push([infinitiv, preteritum, perfektum, norsk]);
+                }
+            });
+
+            createWeekButtons();
+        }
+
+        function createWeekButtons() {
+            const weekSelector2024 = document.getElementById('weekSelector2024');
+            const weekSelector2025 = document.getElementById('weekSelector2025');
+            
+            Object.keys(verbData).sort((a, b) => a - b).forEach(week => {
+                const button = document.createElement('button');
+                button.textContent = `Uke ${week}`;
+                button.className = 'week-button';
+                button.onclick = () => displayVerbs(week);
+                
+                if (week >= 33) {
+                    weekSelector2024.appendChild(button);
+                } else {
+                    weekSelector2025.appendChild(button);
+                }
+            });
+        }
+
+        function displayVerbs(week) {
+            const verbTable = document.getElementById('verbTable').getElementsByTagName('tbody')[0];
+            verbTable.innerHTML = '';
+            verbData[week].forEach(verb => {
+                const row = verbTable.insertRow();
+                row.insertCell().textContent = week;
+                verb.forEach(cell => {
+                    row.insertCell().textContent = cell;
+                });
+            });
+            currentWeek = week;
+            showTestArea();
+        }
+
+        function showTestArea() {
+            document.getElementById('testArea').style.display = 'block';
+            document.getElementById('singleTestArea').style.display = 'none';
+            document.getElementById('tableTestArea').style.display = 'none';
+        }
+
+        function showSingleVerbTest() {
+            document.getElementById('singleTestArea').style.display = 'block';
+            document.getElementById('tableTestArea').style.display = 'none';
+            nextQuestion();
+        }
+
+        function showTableTest() {
+            document.getElementById('singleTestArea').style.display = 'none';
+            document.getElementById('tableTestArea').style.display = 'block';
+            generateTableTest();
+        }
+
+        function nextQuestion() {
+            const verbs = verbData[currentWeek];
+            currentVerb = verbs[Math.floor(Math.random() * verbs.length)];
+            const forms = ['preteritum', 'perfektum partisipp'];
+            currentForm = forms[Math.floor(Math.random() * forms.length)];
+            
+            const question = `Hva er ${currentForm} av "${currentVerb[0]}" (${currentVerb[3]})?`;
+            document.getElementById('testQuestion').textContent = question;
+            document.getElementById('testInput').value = '';
+            document.getElementById('testResult').textContent = '';
+        }
+
+        function checkAnswer() {
+            const userAnswer = document.getElementById('testInput').value.trim().toLowerCase();
+            const correctAnswer = currentForm === 'preteritum' ? currentVerb[1] : currentVerb[2];
+            const resultElement = document.getElementById('testResult');
+            
+            if (userAnswer === correctAnswer.toLowerCase()) {
+                resultElement.textContent = 'Riktig! Bra jobbet!';
+                resultElement.style.color = 'green';
+            } else {
+                resultElement.textContent = `Beklager, riktig svar er "${correctAnswer}".`;
+                resultElement.style.color = 'red';
+            }
+            
+            setTimeout(nextQuestion, 2000);
+        }
+
+        function generateTableTest() {
+            const testTable = document.getElementById('testTable');
+            testTable.innerHTML = '';
+            const headerRow = testTable.insertRow();
+            ['Infinitiv', 'Preteritum', 'Perfektum partisipp', 'Norsk oversettelse'].forEach(header => {
+                const th = document.createElement('th');
+                th.textContent = header;
+                headerRow.appendChild(th);
+            });
+
+            verbData[currentWeek].forEach(verb => {
+                const row = testTable.insertRow();
+                const randomIndex = Math.floor(Math.random() * 4);
+                verb.forEach((cell, index) => {
+                    const td = row.insertCell();
+                    if (index === randomIndex) {
+                        td.textContent = cell;
+                    } else {
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.className = 'table-input';
+                        input.dataset.correct = cell;
+                        td.appendChild(input);
+                    }
+                });
+            });
+        }
+
+        function checkTableAnswer() {
+            let correct = 0;
+            let total = 0;
+            const inputs = document.querySelectorAll('#testTable input');
+            inputs.forEach(input => {
+                total++;
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = input.dataset.correct.toLowerCase();
+                if (userAnswer === correctAnswer) {
+                    correct++;
+                    input.style.color = 'green';
+                } else {
+                    input.style.color = 'red';
+                    input.value += ` (${input.dataset.correct})`;
+                }
+            });
+            const resultElement = document.getElementById('tableTestResult');
+            resultElement.textContent = `Du fikk ${correct} av ${total} riktige.`;
+            resultElement.style.color = correct === total ? 'green' : 'red';
+        }
+
+        parseVerbData();
+        document.getElementById('checkAnswer').addEventListener('click', checkAnswer);
+        document.getElementById('singleVerbTest').addEventListener('click', showSingleVerbTest);
+        document.getElementById('tableTest').addEventListener('click', showTableTest);
+        document.getElementById('checkTableAnswer').addEventListener('click', checkTableAnswer);
+    </script>
+</body>
+</html>
